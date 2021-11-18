@@ -27,8 +27,8 @@ pipeline{
               passwordVariable: 'password')
           ]) {
 
-            export TF_VAR_aws_access_key=username
-            export TF_VAR_aws_secret_key=password
+            sh "export TF_VAR_aws_access_key=$username"
+            sh "export TF_VAR_aws_secret_key=$password"
             
           }
         }
