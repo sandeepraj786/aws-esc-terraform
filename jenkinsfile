@@ -1,0 +1,49 @@
+pipeline{
+    agent any
+    stages {
+        stage('SCM Checkout'){
+            steps{
+                git 'https://github.com/sandeepraj786/ecs-terraform.git'
+            }
+        }
+        stage('passing the parameter'){
+            steps{
+                script{
+                    properties([
+                        parameters([
+                            choice(name:'action',choices:['apply','destroy'],description:'perform terraform command'),
+                        ])
+                    ])
+                }
+            }
+        }
+
+        stage('usernamePassword') {
+      steps {
+        script {
+          withCredentials([
+            usernamePassword(credentialsId: 'awscredentilas',
+              usernameVariable: 'username',
+              passwordVariable: 'password')
+          ]) {
+
+            export TF_VAR_aws_access_key=username
+            export TF_VAR_aws_secret_key=password
+            
+          }
+        }
+      }
+    }
+        stage('terraform init'){
+            steps{
+                sh 'terraform init'
+            }
+        }
+        stage('terraform Action'){
+            steps{
+                echo "Terrform action is ----> ${action}"
+                sh 'terraform ${action} --auto-approve'
+            }
+        }
+    }
+}
