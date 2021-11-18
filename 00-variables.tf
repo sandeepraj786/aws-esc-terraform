@@ -4,11 +4,11 @@ variable "environment" {}
 
 # variable "default_region" {}
 
-variable "aws_access_key" {
+variable "TF_VAR_aws_access_key" {
   description = "The AWS access key."
 }
 
-variable "aws_secret_key" {
+variable "TF_VAR_aws_secret_key" {
   description = "The AWS secret key."
 }
 
