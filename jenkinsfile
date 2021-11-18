@@ -3,7 +3,7 @@ pipeline{
     stages {
         stage('SCM Checkout'){
             steps{
-                git 'https://github.com/sandeepraj786/ecs-terraform.git'
+                git 'https://github.com/sandeepraj786/aws-esc-terraform.git'
             }
         }
         stage('passing the parameter'){
