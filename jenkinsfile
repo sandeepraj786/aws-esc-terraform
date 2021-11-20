@@ -65,7 +65,7 @@ pipeline{
         stage('terraform Action'){
             steps{
                 echo "Terrform action is ----> ${action}"
-                sh 'terraform ${action} --auto-approve -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY''
+                sh "terraform ${action} --auto-approve -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY'"
             }
         }
     }
