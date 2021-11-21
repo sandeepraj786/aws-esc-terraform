@@ -7,6 +7,7 @@ pipeline{
 
     stages {
         stage('SCM Checkout'){
+            cleanWS()
             steps{
                 git 'https://github.com/sandeepraj786/aws-esc-terraform.git'
             }
@@ -53,19 +54,22 @@ pipeline{
 
         stage('terraform init'){
             steps{
-                sh 'terraform init'
+                sh "export TF_VAR_aws_access_key=$ACCESS_KEY"
+                sh "export TF_VAR_aws_secret_key=$SECRET_KEY"
+                sh 'terraform init -backend-config="access_key=$ACCESS_KEY" -backend-config="secret_key=$SECRET_KEY"'
             }
         }
         stage('terraform plan'){
             steps{
-                sh "terraform plan -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY'"
+                sh "terraform plan"
+                // -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY'"
             }
         }
 
         stage('terraform Action'){
             steps{
                 echo "Terrform action is ----> ${action}"
-                sh "terraform ${action} --auto-approve -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY'"
+                sh "terraform ${action} --auto-approve " //-var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY'"
             }
         }
     }
