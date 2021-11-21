@@ -7,7 +7,6 @@ pipeline{
 
     stages {
         stage('SCM Checkout'){
-            cleanWs()
             steps{
                 git 'https://github.com/sandeepraj786/aws-esc-terraform.git'
             }
