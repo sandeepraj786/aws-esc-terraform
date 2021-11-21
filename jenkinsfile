@@ -43,8 +43,8 @@ pipeline{
     //           passwordVariable: 'password')
     //       ]) {
 
-    //         sh "export TF_VAR_aws_access_key=$username"
-    //         sh "export TF_VAR_aws_secret_key=$password"
+    //         sh """export TF_VAR_aws_access_key=$username"
+    //         sh "export TF_VAR_aws_secret_key=$password"""
             
     //       }
     //     }
@@ -53,22 +53,21 @@ pipeline{
 
         stage('terraform init'){
             steps{
-                sh "export TF_VAR_aws_access_key=$ACCESS_KEY"
-                sh "export TF_VAR_aws_secret_key=$SECRET_KEY"
-                sh 'terraform init -backend-config="access_key=$ACCESS_KEY" -backend-config="secret_key=$SECRET_KEY --auto-approve"'
+               // sh "export TF_VAR_aws_access_key=$ACCESS_KEY"
+               // sh "export TF_VAR_aws_secret_key=$SECRET_KEY"
+                sh 'terraform init -backend-config="access_key=${ACCESS_KEY}" -backend-config="secret_key=$SECRET_KEY --auto-approve"'
             }
         }
         stage('terraform plan'){
             steps{
-                sh "terraform plan"
-                // -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY'"
+                sh "terraform plan -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY'"
             }
         }
 
         stage('terraform Action'){
             steps{
                 echo "Terrform action is ----> ${action}"
-                sh "terraform ${action} --auto-approve " //-var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY'"
+                sh "terraform ${action} --auto-approve -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY'"
             }
         }
     }
