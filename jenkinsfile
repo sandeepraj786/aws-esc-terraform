@@ -56,7 +56,7 @@ pipeline{
                // sh "export TF_VAR_aws_access_key=$ACCESS_KEY"
                // sh "export TF_VAR_aws_secret_key=$SECRET_KEY"
                 sh 'terraform init -backend-config="access_key=${ACCESS_KEY}" -backend-config="secret_key=${SECRET_KEY}"'
-               // sh "terraform init -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY'"
+                sh 'terraform init -input=false' //-var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY'"
             }
         }
         stage('terraform plan'){
