@@ -1,5 +1,3 @@
-#default_region = "us-east-1"
-#app_name       = "ecs-ec2-app"
 environment    = "preprod"
 
 
@@ -14,9 +12,9 @@ environment    = "preprod"
  container_port    = 80
  app_name          = "web-server"
  app_image         = "httpd:2.4"
-app_desired_count  = 1
-# container_memory =  300
-# cpu              =  10
+ app_desired_count  = 1
+ container_memory =  300
+ cpu              =  10
 
 
 //ECS Autoscaling group
