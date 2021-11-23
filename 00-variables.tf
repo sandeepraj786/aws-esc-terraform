@@ -23,6 +23,19 @@ variable "secret_key" {
  variable "health_check_type" {
    
  }
+ variable "ec2_ami_id" {
+   
+ }
+ variable "ec2_instance_type" {
+   
+ }
+ variable "cluster_name" {
+   
+ }
+ variable "app_image" {
+   
+ }
+   
    
 
 
