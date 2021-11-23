@@ -9,6 +9,8 @@ data "template_file" "task_definition_template" {
   app_name          =  var.app_name
   app_image         = var.app_image
   container_port    = var.container_port
+  cpu               = var.cpu
+  container_memory  = var.container_memory
 
   }
 }
