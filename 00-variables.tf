@@ -20,6 +20,9 @@ variable "secret_key" {
 
 
  variable "app_desired_count" {}
+ variable "health_check_type" {
+   
+ }
    
 
 
