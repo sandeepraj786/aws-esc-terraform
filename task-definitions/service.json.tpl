@@ -6,9 +6,9 @@
         ],
         "portMappings": [
             {
-                "hostPort": 80,
+                "hostPort": ${container_port},
                 "protocol": "tcp",
-                "containerPort": 80
+                "containerPort": ${container_port}
             }
         ],
         "command": [
@@ -16,7 +16,7 @@
         ],
         "cpu": 10,
         "memory": 300,
-        "image": "httpd:2.4",
-        "name": "app"
+        "image": "${app_image}",
+        "name": "${app_name}"
     }
 ]

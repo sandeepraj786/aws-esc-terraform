@@ -1,9 +1,9 @@
 resource "aws_launch_configuration" "ecs_launch_config" {
-  image_id                    = "ami-0adc4758ea76442e2"
+  image_id                    = "${var.ec2_ami_id}"
   iam_instance_profile        = aws_iam_instance_profile.ecs.arn
   security_groups             = [aws_security_group.ecs_task.id]
-  user_data                   = "#!/bin/bash\necho ECS_CLUSTER=app-cluster >> /etc/ecs/ecs.config"
-  instance_type               = "t2.micro"
+  user_data                   = "#!/bin/bash\necho ECS_CLUSTER=var.cluster_name >> /etc/ecs/ecs.config"
+  instance_type               = "${var.ec2_instance_type}"
   associate_public_ip_address = true
 }
 
@@ -12,11 +12,11 @@ resource "aws_autoscaling_group" "ecs_ec2_asg" {
   vpc_zone_identifier  = aws_subnet.private.*.id
   launch_configuration = aws_launch_configuration.ecs_launch_config.name
 
-  desired_capacity          = 1
-  min_size                  = 1
-  max_size                  = 1
-  health_check_grace_period = 300
-  health_check_type         = "EC2"
+  desired_capacity          = "${var.desired_capacity}"
+  min_size                  = "${var.min_size}"
+  max_size                  = "${var.max_size}"
+  health_check_grace_period = "${var.health_check_grace_period}"
+  health_check_type         = "${var.health_check_type}"
 }
 
 resource "aws_iam_instance_profile" "ecs" {

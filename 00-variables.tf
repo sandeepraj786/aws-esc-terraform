@@ -17,7 +17,41 @@ variable "secret_key" {
 }
 
 
+
+
+ variable "desired_count" {}
+   
+
+
+# variable "cpu" {
+#   description = "CPU required to process the request from container"
+#   default = 256
+# }
+
+
+# variable "container_memory" {
+#     description = "Memory required for the container"
+#     default = 512
+# }
+
+ variable "container_port" {
+   description = "Container port for exposing the services"
+}
+
+# variable "container_name" {
+#     type = string
+#     description = "Name of the cluster"
+# }
+
+
 variable "region" {
   description = "The AWS region to create resources in."
   default = "us-east-2"
 }
+
+
+
+# variable "docker_image_name" {
+#   type = string
+#   description = "Docker image name use the complete format example docker.io/jhon123/myapp:latest, quay.io/jhon123/myapp:v2"
+# }
