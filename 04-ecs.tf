@@ -1,5 +1,5 @@
 resource "aws_ecs_cluster" "ecs_cluster" {
-  name = "${var.cluster_name}-cluster"
+  name = "${var.cluster_name}"
 }
 
 data "template_file" "task_definition_template" {
