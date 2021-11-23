@@ -19,7 +19,7 @@ variable "secret_key" {
 
 
 
- variable "desired_count" {}
+ variable "app_desired_count" {}
    
 
 
