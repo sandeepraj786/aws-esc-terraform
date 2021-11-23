@@ -2,7 +2,7 @@ resource "aws_launch_configuration" "ecs_launch_config" {
   image_id                    = "${var.ec2_ami_id}"
   iam_instance_profile        = aws_iam_instance_profile.ecs.arn
   security_groups             = [aws_security_group.ecs_task.id]
-  user_data                   = "#!/bin/bash\necho ECS_CLUSTER=var.cluster_name >> /etc/ecs/ecs.config"
+  user_data                   = "#!/bin/bash\necho ECS_CLUSTER=${var.cluster_name} >> /etc/ecs/ecs.config"
   instance_type               = "${var.ec2_instance_type}"
   associate_public_ip_address = true
 }
